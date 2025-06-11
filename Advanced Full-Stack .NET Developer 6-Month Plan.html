@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Advanced Full-Stack .NET Developer 6-Month Plan</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:600,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --accent: #16a34a;
+            --bg: #f5f7fa;
+            --bg-glass: rgba(255,255,255,0.7);
+            --bg-glass-dark: rgba(30,41,59,0.7);
+            --text: #222c36;
+            --text-dark: #f1f5f9;
+            --shadow: 0 8px 32px #0002;
+            --navbar-height: 64px;
+            --transition: 0.3s cubic-bezier(.4,0,.2,1);
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, var(--bg) 0%, #c3cfe2 100%);
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+            line-height: 1.7;
+            min-height: 100vh;
+            transition: background 0.5s, color 0.5s;
+        }
+        body.dark {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            color: var(--text-dark);
+        }
+        .navbar {
+            background: var(--bg-glass);
+            backdrop-filter: blur(16px);
+            box-shadow: 0 2px 12px #0001;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: var(--navbar-height);
+            transition: background var(--transition);
+        }
+        body.dark .navbar {
+            background: var(--bg-glass-dark);
+        }
+        .navbar ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+        }
+        .navbar li {
+            margin: 0 18px;
+        }
+        .navbar a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.05em;
+            letter-spacing: 0.5px;
+            padding: 18px 0;
+            transition: color 0.2s, border-bottom 0.2s;
+            border-bottom: 2px solid transparent;
+            position: relative;
+        }
+        .navbar a:hover, .navbar a.active {
+            color: var(--accent);
+            border-bottom: 2px solid var(--accent);
+        }
+        .navbar .theme-toggle {
+            margin-left: 24px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.5em;
+            color: var(--primary);
+            transition: color var(--transition);
+        }
+        body.dark .navbar .theme-toggle {
+            color: var(--accent);
+        }
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            margin-left: 16px;
+        }
+        .hamburger span {
+            height: 3px;
+            width: 26px;
+            background: var(--primary);
+            margin: 4px 0;
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+        body.dark .hamburger span {
+            background: var(--accent);
+        }
+        .container {
+            max-width: 950px;
+            margin: 48px auto 32px auto;
+            background: var(--bg-glass);
+            border-radius: 18px;
+            box-shadow: var(--shadow);
+            padding: 40px 32px;
+            backdrop-filter: blur(24px);
+            animation: fadeIn 1.1s;
+            transition: background var(--transition), color var(--transition);
+        }
+        body.dark .container {
+            background: var(--bg-glass-dark);
+            color: var(--text-dark);
+        }
+        h1, h2, h3 {
+            color: var(--primary);
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            font-family: 'Montserrat', Arial, sans-serif;
+            transition: color var(--transition);
+        }
+        body.dark h1, body.dark h2, body.dark h3 {
+            color: var(--accent);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 1em;
+            font-size: 2.4em;
+            letter-spacing: 1px;
+        }
+        hr {
+            border: none;
+            border-top: 1px solid #e5e7eb;
+            margin: 2em 0;
+        }
+        ul {
+            margin: 0 0 1em 1.5em;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 0.5em;
+        }
+        strong {
+            color: var(--accent);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1em 0;
+            background: #f1f5f9;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px #0001;
+            transition: background var(--transition);
+        }
+        body.dark table {
+            background: #1e293b;
+        }
+        th, td {
+            padding: 14px 12px;
+            border-bottom: 1px solid #e5e7eb;
+            text-align: left;
+        }
+        th {
+            background: #e0e7ef;
+            color: var(--primary);
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            transition: background var(--transition), color var(--transition);
+        }
+        body.dark th {
+            background: #334155;
+            color: var(--accent);
+        }
+        tr:last-child td {
+            border-bottom: none;
+        }
+        .bonus, .tools, .milestones {
+            background: linear-gradient(90deg, #e0f2fe 80%, #bbf7d0 100%);
+            border-left: 5px solid var(--primary);
+            padding: 1.2em 2em;
+            margin: 2.5em 0;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px #0001;
+            transition: background var(--transition), color var(--transition);
+        }
+        body.dark .bonus, body.dark .tools, body.dark .milestones {
+            background: linear-gradient(90deg, #334155 80%, #16a34a33 100%);
+            border-left: 5px solid var(--accent);
+            color: var(--text-dark);
+        }
+        .tools h2, .bonus h2, .milestones h2 {
+            margin-top: 0;
+        }
+        [id] {
+            scroll-margin-top: 90px;
+        }
+        /* Scroll-to-top button */
+        #scrollTopBtn {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            z-index: 200;
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            box-shadow: 0 4px 16px #0003;
+            cursor: pointer;
+            font-size: 2em;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            transition: background var(--transition), color var(--transition), opacity 0.3s;
+            opacity: 0.85;
+        }
+        #scrollTopBtn:hover {
+            background: var(--accent);
+        }
+        /* Section fade-in animation */
+        section {
+            opacity: 0;
+            transform: translateY(32px);
+            transition: opacity 0.7s, transform 0.7s;
+        }
+        section.visible {
+            opacity: 1;
+            transform: none;
+        }
+        /* Responsive */
+        @media (max-width: 900px) {
+            .container { padding: 24px 8px; }
+        }
+        @media (max-width: 700px) {
+            .container { padding: 14px 4px; }
+            table, th, td { font-size: 0.97em; }
+            .navbar ul { flex-wrap: wrap; }
+            .navbar li { margin: 0 10px; }
+        }
+        @media (max-width: 600px) {
+            .navbar ul {
+                position: fixed;
+                top: var(--navbar-height);
+                left: 0;
+                right: 0;
+                background: var(--bg-glass);
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 16px 0;
+                box-shadow: 0 8px 32px #0002;
+                transform: translateY(-120%);
+                transition: transform 0.4s;
+                z-index: 999;
+            }
+            body.dark .navbar ul {
+                background: var(--bg-glass-dark);
+            }
+            .navbar ul.open {
+                transform: translateY(0);
+            }
+            .navbar li {
+                margin: 12px 24px;
+            }
+            .hamburger {
+                display: flex;
+            }
+        }
+        @media (max-width: 480px) {
+            h1 { font-size: 1.3em; }
+            .container { padding: 7px 2px; }
+            .navbar a { font-size: 0.95em; }
+            #scrollTopBtn {
+                width: 40px;
+                height: 40px;
+                font-size: 1.5em;
+                right: 12px;
+                bottom: 12px;
+            }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-16px);}
+            to { opacity: 1; transform: none;}
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="hamburger" id="hamburger" aria-label="Open navigation" tabindex="0">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul id="navLinks">
+            <li><a href="#month1">Month 1</a></li>
+            <li><a href="#month2">Month 2</a></li>
+            <li><a href="#month3">Month 3</a></li>
+            <li><a href="#month4">Month 4</a></li>
+            <li><a href="#month5">Month 5</a></li>
+            <li><a href="#month6">Month 6</a></li>
+            <li><a href="#bonus">Bonus Tips</a></li>
+            <li><a href="#routine">Daily Routine</a></li>
+            <li><a href="#weekly">Weekly Focus</a></li>
+            <li><a href="#tools">Tools</a></li>
+            <li><a href="#milestones">Milestones</a></li>
+        </ul>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+            <svg id="themeIcon" width="26" height="26" viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2"/>
+                <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="currentColor" stroke-width="2"/>
+            </svg>
+        </button>
+    </nav>
+    <button id="scrollTopBtn" aria-label="Scroll to top">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+            <path d="M12 19V5M5 12l7-7 7 7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </button>
+    <div class="container">
+        <h1>Advanced Full-Stack .NET Developer<br>6-Month Learning Plan</h1>
+        <p style="text-align:center;font-size:1.1em;">
+            Master the <strong>Advanced Full-Stack .NET Developer Course Curriculum</strong> and secure a high-paying job with this structured <strong>6-month plan</strong>.<br>
+            <em>Recommended: 4–5 hours daily (adjust as needed).</em>
+        </p>
+        <hr>
+
+        <section id="month1">
+            <h2>🗓️ Month 1: Foundations – ASP.NET Core MVC, Web API, and LINQ</h2>
+            <h3>Week 1–2: ASP.NET Core &amp; MVC Basics</h3>
+            <ul>
+                <li>MVC Pattern, ASP.NET Core Overview</li>
+                <li>Model, View, Controller, Actions</li>
+                <li>Razor View Engine, Routing, Helpers</li>
+                <li>Data Passing Techniques, Forms, Model Binding</li>
+            </ul>
+            <h3>Week 3–4: LINQ &amp; Entity Framework Core</h3>
+            <ul>
+                <li>LINQ Basics, Query Syntax, Operators</li>
+                <li>Joins, Aggregations</li>
+                <li>EF Core: Overview, Database First, Model First</li>
+                <li>CRUD operations using EF Core</li>
+            </ul>
+        </section>
+
+        <hr>
+
+        <section id="month2">
+            <h2>🗓️ Month 2: Advanced ASP.NET Core &amp; Web API</h2>
+            <h3>Week 5–6: RESTful API &amp; Core Concepts</h3>
+            <ul>
+                <li>Request/Response Lifecycle</li>
+                <li>Routing, Controller, Action Results</li>
+                <li>Content Negotiation, Formatters</li>
+                <li>Parameter Binding, Validations</li>
+            </ul>
+            <h3>Week 7–8: Middleware, Filters, and Security</h3>
+            <ul>
+                <li>Pipeline, Filters</li>
+                <li>Authentication &amp; Authorization (JWT, Cookies)</li>
+                <li>API Versioning, Hosting (IIS, Kestrel)</li>
+            </ul>
+        </section>
+
+        <hr>
+
+        <section id="month3">
+            <h2>🗓️ Month 3: Frontend with Angular or React (choose one)</h2>
+            <h3>Week 9–10: JavaScript &amp; ES6</h3>
+            <ul>
+                <li>ES6 Syntax: let, const, arrow functions, classes</li>
+                <li>Modules, Promises, Async/Await</li>
+            </ul>
+            <h3>Week 11–12: Angular or React Fundamentals</h3>
+            <ul>
+                <li>Project Setup, SPA Architecture</li>
+                <li>Components, Lifecycle, Nesting</li>
+                <li>Data Binding, Routing, Events</li>
+            </ul>
+        </section>
+
+        <hr>
+
+        <section id="month4">
+            <h2>🗓️ Month 4: Frontend Forms, API Integration &amp; Auth</h2>
+            <h3>Week 13–14: Advanced Frontend</h3>
+            <ul>
+                <li>Forms &amp; Validation</li>
+                <li>Services and HTTP Interceptors</li>
+                <li>JWT Token Integration</li>
+                <li>UI Enhancements with Bootstrap</li>
+            </ul>
+            <h3>Week 15–16: Backend + Frontend Integration</h3>
+            <ul>
+                <li>Connect ASP.NET Web API with Angular/React</li>
+                <li>Deploy frontend with backend</li>
+                <li>Role-based access control on UI</li>
+            </ul>
+        </section>
+
+        <hr>
+
+        <section id="month5">
+            <h2>🗓️ Month 5: Microsoft Azure &amp; DevOps (AZ-204)</h2>
+            <h3>Week 17–18: Azure Core Services</h3>
+            <ul>
+                <li>VMs, Azure Storage, SQL, CosmosDB</li>
+                <li>App Services, Function App, Logic Apps</li>
+            </ul>
+            <h3>Week 19–20: CI/CD &amp; Project Architecture</h3>
+            <ul>
+                <li>Azure DevOps Pipelines: Build &amp; Release</li>
+                <li>APIM, Key Vault, Entra ID, Service Bus</li>
+                <li>Architecture Setup with Cloud Services</li>
+            </ul>
+        </section>
+
+        <hr>
+
+        <section id="month6">
+            <h2>🗓️ Month 6: Projects, Gen AI Tools &amp; Interview Prep</h2>
+            <h3>Week 21–22: Guided &amp; Independent Projects</h3>
+            <ul>
+                <li>Follow Clean Architecture</li>
+                <li>Implement RazorPay, Auth, Error Logging</li>
+                <li>Bootstrap, Performance Optimization</li>
+                <li>Host on Azure or IIS</li>
+            </ul>
+            <h3>Week 23: GitHub Copilot &amp; ChatGPT</h3>
+            <ul>
+                <li>Coding, Debugging, and Optimization with Copilot</li>
+                <li>ChatGPT for Code Translation, Docs Generation</li>
+            </ul>
+            <h3>Week 24: Career Coaching &amp; Interview Prep</h3>
+            <ul>
+                <li>Resume &amp; GitHub Portfolio</li>
+                <li>Mock Interviews, Confidence Building</li>
+                <li>Behavioral Questions, Tech Interview Tips</li>
+            </ul>
+        </section>
+
+        <section id="bonus" class="bonus">
+            <h2>✅ Bonus Tips</h2>
+            <ul>
+                <li><strong>Daily:</strong> 1 hour of hands-on coding + 1 hour reviewing/practicing yesterday's content.</li>
+                <li><strong>Weekly:</strong> Push at least one small project/module to GitHub.</li>
+                <li><strong>Monthly:</strong> Deploy at least one working solution to Azure or local IIS.</li>
+                <li><strong>Track Progress:</strong> Use Notion or Trello to manage your learning roadmap.</li>
+            </ul>
+        </section>
+
+        <section id="routine">
+            <h2>📅 Daily Routine Plan (5 Hours/Day)</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Time Slot</th>
+                        <th>Activity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>6:00 AM – 6:30 AM</strong></td><td>Morning routine + Light exercise (boost focus and consistency)</td></tr>
+                    <tr><td><strong>6:30 AM – 7:30 AM</strong></td><td>📘 <strong>Theory Learning Session 1</strong> (Watch course videos/read documentation)</td></tr>
+                    <tr><td><strong>7:30 AM – 8:30 AM</strong></td><td>💻 <strong>Hands-On Coding</strong> (Build small modules or practice concepts)</td></tr>
+                    <tr><td><strong>8:30 AM – 9:00 AM</strong></td><td>☕ Break + Quick review of what you’ve learned</td></tr>
+                    <tr><td><strong>9:00 AM – 10:00 AM</strong></td><td>💡 <strong>Build or Debug Project Component</strong> (Work on guided/mini projects)</td></tr>
+                    <tr><td><strong>10:00 AM – 10:30 AM</strong></td><td>📋 <strong>Revision + Note Taking</strong> (Summarize what you learned, Git commit)</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="weekly">
+            <h2>🧠 Weekly Focus Allocation</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Day</th>
+                        <th>Focus</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>Monday</strong></td><td>Backend: ASP.NET Core / Web API</td></tr>
+                    <tr><td><strong>Tuesday</strong></td><td>Backend: Entity Framework / LINQ</td></tr>
+                    <tr><td><strong>Wednesday</strong></td><td>Frontend: Angular or React (Components, Routing, Forms)</td></tr>
+                    <tr><td><strong>Thursday</strong></td><td>Frontend: API Integration, Validation, Authentication (JWT)</td></tr>
+                    <tr><td><strong>Friday</strong></td><td>Microsoft Azure + CI/CD DevOps</td></tr>
+                    <tr><td><strong>Saturday</strong></td><td>Project Building (Guided or Independent) + GitHub Updates</td></tr>
+                    <tr><td><strong>Sunday</strong></td><td><strong>Review + Resume</strong> + Interview prep + Gen AI tools (ChatGPT, Copilot)</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="tools" class="tools">
+            <h2>🛠️ Tools to Use Daily</h2>
+            <ul>
+                <li><strong>Visual Studio / VS Code</strong> – for development</li>
+                <li><strong>Postman</strong> – for testing APIs</li>
+                <li><strong>Azure Portal</strong> – for cloud deployment and services</li>
+                <li><strong>GitHub</strong> – for version control and portfolio</li>
+                <li><strong>ChatGPT / GitHub Copilot</strong> – for debugging and code generation</li>
+                <li><strong>Trello / Notion</strong> – for progress tracking</li>
+            </ul>
+        </section>
+
+        <section id="milestones" class="milestones">
+            <h2>🧩 Milestone Checkpoints</h2>
+            <ul>
+                <li><strong>End of Month 1:</strong> CRUD with ASP.NET Core + EF Core ready</li>
+                <li><strong>End of Month 2:</strong> REST API + Auth system complete</li>
+                <li><strong>End of Month 3:</strong> Frontend UI complete with routing and forms</li>
+                <li><strong>End of Month 4:</strong> Full-stack app deployed locally</li>
+                <li><strong>End of Month 5:</strong> Azure hosted, CI/CD running</li>
+                <li><strong>End of Month 6:</strong> Resume + Portfolio ready, mock interviews done</li>
+            </ul>
+        </section>
+    </div>
+    <script>
+        // Hamburger menu for mobile
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('open');
+        });
+        hamburger.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') navLinks.classList.toggle('open');
+        });
+        // Close nav on link click (mobile)
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth < 601) navLinks.classList.remove('open');
+            });
+        });
+
+        // Highlight active nav link on scroll
+        const sections = document.querySelectorAll('section');
+        const navAnchors = document.querySelectorAll('.navbar a');
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                if (window.scrollY >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+            navAnchors.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').slice(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Smooth section reveal on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.15 });
+        document.querySelectorAll('section').forEach(sec => observer.observe(sec));
+
+        // Scroll-to-top button
+        const scrollBtn = document.getElementById('scrollTopBtn');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                scrollBtn.style.display = 'flex';
+            } else {
+                scrollBtn.style.display = 'none';
+            }
+        });
+        scrollBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Dark mode toggle with localStorage
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        function setTheme(dark) {
+            document.body.classList.toggle('dark', dark);
+            themeIcon.innerHTML = dark
+                ? `<path d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z" stroke="currentColor" stroke-width="2" fill="none"/>`
+                : `<circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2"/>
+                   <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="currentColor" stroke-width="2"/>`;
+        }
+        function getTheme() {
+            return localStorage.getItem('theme') === 'dark';
+        }
+        themeToggle.addEventListener('click', () => {
+            const dark = !document.body.classList.contains('dark');
+            setTheme(dark);
+            localStorage.setItem('theme', dark ? 'dark' : 'light');
+        });
+        // On load
+        setTheme(getTheme());
+    </script>
+    <footer style="text-align:center; margin: 40px 0 16px 0; color: #64748b; font-size: 1em;">
+        <div>
+            &copy; 2024 Advanced Full-Stack .NET Developer Plan.
+            <br>
+            By VM Stydy Hub
+            <br>
+            Topics: ASP.NET Core, Web API, Entity Framework, Angular, React, Azure, DevOps, GitHub.
+            <br>
+            <a href="#" title="GitHub" style="color:#2563eb; text-decoration:none; margin:0 6px; vertical-align:middle;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.58 2 12.26c0 4.48 2.87 8.28 6.84 9.63.5.09.68-.22.68-.48 0-.24-.01-.87-.01-1.7-2.78.62-3.37-1.36-3.37-1.36-.45-1.18-1.1-1.5-1.1-1.5-.9-.63.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.74-.1-.26-.45-1.3.1-2.7 0 0 .84-.28 2.75 1.04A9.36 9.36 0 0112 6.84c.85.004 1.7.12 2.5.34 1.91-1.32 2.75-1.04 2.75-1.04.55 1.4.2 2.44.1 2.7.64.71 1.03 1.62 1.03 2.74 0 3.94-2.34 4.8-4.57 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.8 0 .27.18.58.69.48A10.01 10.01 0 0022 12.26C22 6.58 17.52 2 12 2z" fill="#2563eb"/></svg>
+            </a>
+            <a href="https://youtube.com/@updatesvsm?si=1smz1ieqZrGmgLSO" title="YouTube" style="color:#ff0000; text-decoration:none; margin:0 6px; vertical-align:middle;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                    <rect x="2" y="6" width="20" height="12" rx="4" fill="#ff0000"/>
+                    <polygon points="10,9 16,12 10,15" fill="#fff"/>
+                </svg>
+            </a>
+            <a href="https://www.instagram.com/updatesvsm" title="Instagram" style="color:#e1306c; text-decoration:none; margin:0 6px; vertical-align:middle;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                    <radialGradient id="ig" cx="0.5" cy="0.5" r="0.8">
+                        <stop offset="0%" stop-color="#feda75"/>
+                        <stop offset="40%" stop-color="#fa7e1e"/>
+                        <stop offset="60%" stop-color="#d62976"/>
+                        <stop offset="80%" stop-color="#962fbf"/>
+                        <stop offset="100%" stop-color="#4f5bd5"/>
+                    </radialGradient>
+                    <rect x="3" y="3" width="18" height="18" rx="5" fill="url(#ig)"/>
+                    <circle cx="12" cy="12" r="4" fill="#fff"/>
+                    <circle cx="17" cy="7" r="1.2" fill="#fff"/>
+                </svg>
+            </a>
+            <a href="https://t.me/+Y3bmQO862bxmOWY1" title="Telegram" style="color:#229ed9; text-decoration:none; margin:0 6px; vertical-align:middle;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="12" fill="#229ed9"/>
+                    <path d="M17.5 7.5L6.5 11.5c-.5.2-.5.5 0 .7l2.7.9 1 3.1c.1.3.3.3.5.1l1.4-1.4 2.9 2.1c.3.2.5.1.6-.2l2-8c.1-.4-.2-.6-.6-.5z" fill="#fff"/>
+                </svg>
+            </a>
+        </div>
+    </footer>
+</body>
+</html>

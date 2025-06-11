@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Links</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            background: #fff;
+            padding: 2rem 2.5rem;
+            border-radius: 18px;
+            box-shadow: 0 8px 32px rgba(60,60,60,0.15);
+            max-width: 400px;
+            width: 100%;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            letter-spacing: 1px;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        li {
+            margin-bottom: 1rem;
+        }
+        a {
+            display: block;
+            text-decoration: none;
+            color: #fff;
+            background: linear-gradient(90deg, #36d1c4 0%, #5b86e5 100%);
+            padding: 0.9rem 1.2rem;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 1.05rem;
+            box-shadow: 0 2px 8px rgba(91,134,229,0.08);
+            transition: background 0.2s, transform 0.2s;
+        }
+        a:hover {
+            background: linear-gradient(90deg, #5b86e5 0%, #36d1c4 100%);
+            transform: translateY(-2px) scale(1.03);
+        }
+        @media (max-width: 500px) {
+            .container {
+                padding: 1rem;
+                max-width: 95vw;
+            }
+            h1 {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+    <script>
+        // Optional: Animate links on load
+        document.addEventListener('DOMContentLoaded', () => {
+            const links = document.querySelectorAll('li');
+            links.forEach((li, i) => {
+                li.style.opacity = 0;
+                setTimeout(() => {
+                    li.style.transition = 'opacity 0.5s';
+                    li.style.opacity = 1;
+                }, 150 * i);
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Blog Links</h1>
+        <ul>
+            <li>
+                <a href="SQL Server Short Notes.html">
+                    SQL Server Short Notes
+                </a>
+            </li>
+            <li>
+                <a href="Advanced Full-Stack .NET Developer 6-Month Plan.html">
+                    Advanced Full-Stack .NET Developer 6-Month Plan
+                </a>
+            </li>
+            <li>
+                <a href="BIG DATA ANALYTIC Regression and Classification Unit III.html">
+                    BIG DATA ANALYTIC Regression and Classification Unit III
+                </a>
+            </li>
+            <li>
+                <a href="Big Data Analytic Review of Basic Data Analytics Unit 2.html">
+                    Big Data Analytic Review of Basic Data Analytics Unit 2
+                </a>
+            </li>
+            <li>
+                <a href="Big Data Analytics and Lifecycle Unit I.html">
+                    Big Data Analytics and Lifecycle Unit I
+                </a>
+            </li>
+            <li>
+                <a href="OPERATING SYSTEM UNIT ONE IMPORTENT QUESTION.HTML">
+                    OPERATING SYSTEM UNIT ONE IMPORTANT QUESTION
+                </a>
+            </li>
+            <li>
+                <a href="Review of Basic Data Analytics Unit II.html">
+                    Review of Basic Data Analytics Unit II
+                </a>
+            </li>
+            <li>
+                <a href="Security Policy and Governance - B.E. Sixth Semester (CSE).html">
+                    Security Policy and Governance - B.E. Sixth Semester (CSE)
+                </a>
+            </li>
+            <li>
+                <a href="Security Policy and Governance All Unites Review.html">
+                    Security Policy and Governance All Units Review
+                </a>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>

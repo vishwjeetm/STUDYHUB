@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyBlog</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f9f9f9;
+            color: #222;
+            transition: background 0.3s, color 0.3s;
+        }
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #fff;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #0078d7;
+            letter-spacing: 2px;
+        }
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            margin: 0;
+            padding: 0;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #222;
+            font-weight: 500;
+            transition: color 0.2s;
+            padding-bottom: 2px;
+            border-bottom: 2px solid transparent;
+        }
+        .nav-links a.active, .nav-links a:hover {
+            color: #0078d7;
+            border-bottom: 2px solid #0078d7;
+        }
+        .theme-toggle {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .theme-toggle:hover {
+            color: #0078d7;
+        }
+        .hero {
+            background: linear-gradient(120deg, #0078d7 0%, #00c6fb 100%);
+            color: #fff;
+            text-align: center;
+            padding: 4rem 2rem 3rem 2rem;
+        }
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
+        }
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+        .cta-btn {
+            background: #fff;
+            color: #0078d7;
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-decoration: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: background 0.2s, color 0.2s;
+            display: inline-block;
+            margin-top: 1rem;
+        }
+        .cta-btn:hover {
+            background: #0078d7;
+            color: #fff;
+        }
+        .main-content {
+            max-width: 1100px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        .features {
+            display: flex;
+            gap: 2rem;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+        .feature-card {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            padding: 2rem;
+            flex: 1 1 250px;
+            min-width: 250px;
+            text-align: center;
+            margin-bottom: 1rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .feature-card:hover {
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 6px 24px rgba(0,120,215,0.12);
+        }
+        .newsletter {
+            background: #eaf6ff;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .newsletter h2 {
+            margin-bottom: 1rem;
+        }
+        .newsletter form {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+        .newsletter input[type="email"] {
+            padding: 0.7rem 1rem;
+            border-radius: 20px;
+            border: 1px solid #b3d8fd;
+            font-size: 1rem;
+            outline: none;
+            min-width: 220px;
+        }
+        .newsletter button {
+            background: #0078d7;
+            color: #fff;
+            border: none;
+            border-radius: 20px;
+            padding: 0.7rem 1.5rem;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .newsletter button:hover {
+            background: #005fa3;
+        }
+        #newsletterMsg {
+            color: #0078d7;
+            font-weight: 500;
+            min-height: 1.2em;
+        }
+        .footer {
+            background: #222;
+            color: #fff;
+            text-align: center;
+            padding: 1.2rem 0;
+            font-size: 1rem;
+            margin-top: 2rem;
+            border-radius: 0 0 12px 12px;
+        }
+        .dark-theme {
+            background: #181c24;
+            color: #eaf6ff;
+        }
+        .dark-theme .navbar {
+            background: #232a34;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        .dark-theme .nav-links a {
+            color: #eaf6ff;
+        }
+        .dark-theme .nav-links a.active, .dark-theme .nav-links a:hover {
+            color: #00c6fb;
+            border-bottom: 2px solid #00c6fb;
+        }
+        .dark-theme .hero {
+            background: linear-gradient(120deg, #232a34 0%, #0078d7 100%);
+            color: #fff;
+        }
+        .dark-theme .feature-card {
+            background: #232a34;
+            color: #eaf6ff;
+        }
+        .dark-theme .newsletter {
+            background: #232a34;
+        }
+        .dark-theme .newsletter input[type="email"] {
+            background: #181c24;
+            color: #eaf6ff;
+            border: 1px solid #0078d7;
+        }
+        .dark-theme .newsletter button {
+            background: #00c6fb;
+            color: #232a34;
+        }
+        .dark-theme .footer {
+            background: #181c24;
+            color: #eaf6ff;
+        }
+        @media (max-width: 900px) {
+            .features {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+        }
+        @media (max-width: 600px) {
+            .navbar {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+            .main-content {
+                padding: 0 0.5rem;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .feature-card {
+                padding: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">MyBlog</div>
+        <ul class="nav-links">
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="blogs.html">Blogs</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" id="themeToggle" title="Toggle dark mode">🌙</button>
+    </nav>
+    <header class="hero">
+        <h1>Welcome to MyBlog</h1>
+        <p>Your daily dose of insightful articles and stories.</p>
+        <a href="blogs.html" class="cta-btn">Read Blogs</a>
+    </header>
+    <main class="main-content">
+        <section class="features">
+            <div class="feature-card">
+                <h2>Latest Posts</h2>
+                <p>Stay updated with the newest articles from our talented writers.</p>
+                <a href="view-blogs.html" class="cta-btn">View Blogs</a>
+            </div>
+            <div class="feature-card">
+                <h2>Categories</h2>
+                <p>Explore topics that interest you, from tech to lifestyle and more.</p>
+                <a href="browse-categories.html" class="cta-btn">Browse Categories</a>
+            </div>
+            <div class="feature-card">
+                <h2>Join Community</h2>
+                <p>Connect, comment, and share your thoughts with fellow readers.</p>
+                <a href="community.html" class="cta-btn">Join Now</a>
+            </div>
+        </section>
+        <section class="newsletter">
+            <h2>Subscribe to our Newsletter</h2>
+            <form id="newsletterForm">
+                <input type="email" placeholder="Enter your email" required>
+                <button type="submit">Subscribe</button>
+            </form>
+            <div id="newsletterMsg"></div>
+        </section>
+    </main>
+    <footer class="footer">
+        <p>&copy; 2024 MyBlog. All rights reserved.</p>
+    </footer>
+    <script src="main.js"></script>
+    <script>
+        document.getElementById('themeToggle').onclick = function() {
+            document.body.classList.toggle('dark-theme');
+        };
+        document.getElementById('newsletterForm').onsubmit = function(e) {
+            e.preventDefault();
+            document.getElementById('newsletterMsg').textContent = "Thank you for subscribing!";
+            this.reset();
+        };
+    </script>
+</body>
+</html>

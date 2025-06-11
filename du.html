@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Study Hub</title>
+    <meta name="viewport" content="width=1024">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f4f6fb;
+            color: #222;
+        }
+        .navbar {
+            background: linear-gradient(90deg, #3a8dde 0%, #6a5acd 100%);
+            color: #fff;
+            padding: 0 40px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+        }
+        .navbar .logo {
+            font-size: 1.7em;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+        .navbar .subjects {
+            display: flex;
+            gap: 30px;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none; /* Firefox */
+        }
+        .navbar .subjects::-webkit-scrollbar {
+            display: none; /* Chrome/Safari */
+        }
+        .navbar .subject-btn {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.1em;
+            cursor: pointer;
+            padding: 8px 18px;
+            border-radius: 20px;
+            transition: background 0.2s;
+            flex: 0 0 auto;
+        }
+        .navbar .subject-btn.active,
+        .navbar .subject-btn:hover {
+            background: rgba(255,255,255,0.18);
+        }
+        .container {
+            display: flex;
+            height: calc(100vh - 60px);
+        }
+        .sidebar {
+            width: 260px;
+            background: #fff;
+            border-right: 1px solid #e0e0e0;
+            padding: 30px 0 0 0;
+            box-shadow: 2px 0 8px rgba(0,0,0,0.03);
+            display: flex;
+            flex-direction: column;
+            min-width: 220px;
+            overflow: hidden;
+            /* Animation: fade-in */
+            opacity: 0;
+            animation: sidebarFadeIn 0.7s ease forwards;
+        }
+        @keyframes sidebarFadeIn {
+            from { opacity: 0; transform: translateX(-30px);}
+            to { opacity: 1; transform: translateX(0);}
+        }
+        .sidebar h3 {
+            margin: 0 0 18px 32px;
+            font-size: 1.2em;
+            color: #3a8dde;
+            letter-spacing: 1px;
+            flex: 0 0 auto;
+        }
+        .topics-list {
+            list-style: none;
+            padding: 0 0 0 32px;
+            margin: 0;
+            flex: 1 1 auto;
+            overflow-y: auto;
+            min-height: 0; /* Required for flex children to shrink */
+            /* Optional: nice scrollbar for topics-list only */
+            scrollbar-width: thin;
+            scrollbar-color: #d0d8e8 #f4f6fb;
+        }
+        .topics-list::-webkit-scrollbar {
+            width: 8px;
+            background: #f4f6fb;
+        }
+        .topics-list::-webkit-scrollbar-thumb {
+            background: #d0d8e8;
+            border-radius: 6px;
+        }
+        .topics-list li a {
+            display: block;
+            color: #3a8dde;
+            text-decoration: none;
+            padding: 8px 0;
+            border-radius: 6px;
+            transition: background 0.2s, color 0.2s;
+        }
+        .topics-list li a.active,
+        .topics-list li a:hover {
+            background: #eaf2fd;
+            color: #222;
+        }
+        .main-content {
+            flex: 1;
+            padding: 40px 60px;
+            overflow-y: auto;
+            background: #f4f6fb;
+        }
+        .main-content h2 {
+            color: #3a8dde;
+            margin-top: 0;
+        }
+        .main-content p {
+            font-size: 1.15em;
+            line-height: 1.7;
+        }
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+            background: #f4f6fb;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #d0d8e8;
+            border-radius: 6px;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 900px) {
+            .container {
+                flex-direction: column;
+                height: auto;
+            }
+            .sidebar {
+                width: 100%;
+                min-width: 0;
+                border-right: none;
+                border-bottom: 1px solid #e0e0e0;
+                box-shadow: none;
+                padding: 20px 0 0 0;
+                /* Add for mobile: */
+                max-height: none;
+            }
+            .sidebar h3 {
+                margin-left: 20px;
+            }
+            .topics-list {
+                padding-left: 20px;
+                display: flex;
+                flex-wrap: wrap;
+                gap: 10px;
+                flex: unset;
+                overflow-y: unset;
+                min-height: unset;
+                max-height: unset;
+            }
+            .topics-list li {
+                margin-bottom: 0;
+            }
+            .topics-list li a {
+                font-size: 1em;
+                padding: 7px 10px;
+            }
+            .main-content {
+                padding: 24px 12px;
+            }
+        }
+        @media (max-width: 600px) {
+            .navbar {
+                flex-direction: column;
+                align-items: flex-start;
+                height: auto;
+                padding: 10px 10px;
+            }
+            .navbar .logo {
+                font-size: 1.2em;
+                margin-bottom: 8px;
+            }
+            .navbar .subjects {
+                gap: 10px;
+                width: 100%;
+            }
+            .navbar .subject-btn {
+                font-size: 1em;
+                padding: 6px 10px;
+            }
+            .sidebar {
+                padding-top: 10px;
+            }
+            .sidebar h3 {
+                font-size: 1em;
+                margin-bottom: 10px;
+            }
+            .topics-list {
+                gap: 6px;
+                padding-left: 10px;
+            }
+            .main-content {
+                padding: 14px 4vw;
+            }
+            .main-content h2 {
+                font-size: 1.1em;
+            }
+            .main-content p {
+                font-size: 1em;
+            }
+            iframe {
+                height: 50vw !important;
+                min-height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">Study Hub</div>
+        <div class="subjects" id="subjectsBar">
+            <button class="subject-btn active" data-subject="SQL">SQL</button>
+            <button class="subject-btn" data-subject="Python">Python</button>
+            <button class="subject-btn" data-subject="JavaScript">JavaScript</button>
+            <button class="subject-btn" data-subject="HTML">HTML</button>
+            <button class="subject-btn" data-subject="CSharp">C#</button>
+        </div>
+    </div>
+    <div class="container">
+        <aside class="sidebar">
+            <h3 id="sidebarTitle">SQL Topics</h3>
+            <ul class="topics-list" id="topicsList">
+                <!-- Topics will be injected here -->
+            </ul>
+        </aside>
+        <main class="main-content" id="mainContent">
+            <h2>Welcome to Study Hub!</h2>
+            <p>Select a subject from the top to explore its topics. Click on any topic to start learning. This site is designed to make your study journey interactive and enjoyable!</p>
+        </main>
+    </div>
+    <script>
+        // Subjects and their topics  
+        const subjects = {
+            SQL: [
+                { title: "Introduction to SQL", content: "SQL (Structured Query Language) is used to communicate with databases. It is the standard language for relational database management systems." },
+                { title: "SQL Server & Database Fundamentals", external: "SQL/SQL-Server-&-Database-Fundamentals.html" },
+                { title: "RDBMS Concepts & Structure", external: "SQL/RDBMS-Concepts-&-Structure.html" },
+                { title: "Object-Relational DBMS & DB Development Life Cycle", external: "SQL/Object-Relational-DBMS-&-DB-Development-Life-Cycle.html" },
+                { title: "SQL Server Overview & Architecture", external: "SQL/SQL-Server-Overview-&-Architecture.html" },
+                { title: "SQL Server Setup & Database Initialization", external: "SQL/SQL-Server-Setup-&-Database-Initialization.html" },
+                { title: "SQL Server Data Types", external: "SQL/SQL-Server-Data-Types.html" },
+                { title: "Tabele Create, Display and Pop", external: "SQL/Tabele-Create-Display-and-Pop.html" },
+                { title: "sql sercver notes", external: "SQL/SQL Server Short Notes.html" },
+                { title: "WHERE Clause", external: "SQL/WHERE-Clause.html" },
+                { title: "IN Operator", external: "SQL/IN-Operator.html" },
+                { title: "BETWEEN Operator for Range-Based Filtering", external: "SQL/BETWEEN-Operator-for-Range-Based-Filtering.html" },
+                { title: "Conditional Data Retrieval Using SQL WHERE, AND, OR, IN, and BETWEEN Operators", external: "SQL/Conditional_DataRetrieval_Using_SQL_WHERE_AND_OR_IN_and_BETWEEN_Operators.html" },
+                { title: "LIKE Operator", external: "SQL/LIKE_OPERATOR.html" },
+                { title: "IS operator", external: "SQL/IS_operator.html" },
+                { title: "ALIAS", external: "SQL/ALIAS.html" },
+                { title: "ORDER BY clause", external: "SQL/ORDER_BY_clause.html" },
+                { title: "DISTINCT clause Remove Duplicate Records", external: "SQL/DISTINCT_clause.html" },
+                { title: "TOP clause", external: "SQL/TOP_clause.html" },
+                { title: "DML (Data Manipulation Language)", external: "SQL/DML_DML_Data_Manipulation_Language.html" },
+                { title: "INSERT", external: "SQL/SQL_INSERT.html" },
+                { title: "UPDATE", external: "SQL/UPDATE.html" },
+                { title: "DELETE", external: "SQL/SQL_DELETE.html" },
+                { title: "MERGE", external: "SQL/SQL_MERGE.html" },
+                { title: "DDL Data Definition Language", external: "SQL/DDL_Data_Definition_Language.html" },
+                { title: "ALTER", external: "SQL/SQL_ALTER.html" },
+                { title: "DROP", external: "SQL/SQL_DROP.html" },
+                { title: "TRUNCATE", external: "SQL/SQL_TRUNCATE.html" },
+                { title: "Differences Between DELETE vs TRUNCATE", external: "SQL/Differences_Between_DELETE_and_TRUNCATE.html" },
+                { title: "SP_RENAME", external: "SQL/SP_RENAME.html" },
+                { title: "What is IDENTITY", external: "SQL/What_is_IDENTITY.html" },
+                { title: "Built-in Functions in SQL Server", external: "SQL/Built-in_Functions_in_SQL_Server.html" },
+                { title: "UPPER() & LOWER() Functions", external: "SQL/UPPER_&_LOWER_Functions.html" },
+                { title: "LEN() Function", external: "SQL/LEN_Function.html" },
+                { title: "LEFT() & RIGHT() Functions", external: "SQL/LEFT_and_RIGHT_Functions.html" },
+                { title: "SUBSTRING() Function", external: "SQL/SUBSTRING_Function.html" },
+                { title: "CHARINDEX() Function", external: "SQL/CHARINDEX_Function.html" },
+                { title: "Splitting Full Names into First, Middle, and Last Name in SQL Server", external: "SQL/ex1.html" },
+                { title: "REPLICATE() Function", external: "SQL/REPLICATE_Function.html" },
+                { title: "REPLACE() Function", external: "SQL/REPLACE_Function.html" },
+                { title: "TRANSLATE() Function", external: "SQL/TRANSLATE_Function.html" },
+                { title: "DATE functions", external: "SQL/DATE_functions.html" },
+                { title: "GETDATE()", external: "SQL/GETDATE_function.html" },
+                { title: "DATEPART()", external: "SQL/DATEPART_Function.html" },
+                { title: "DATENAME()", external: "SQL/DATENAME_Function.html" },
+                { title: "FORMAT()", external: "SQL/FORMAT_Function.html" },
+                { title: "DATEADD() ", external: "SQL/DATEADD_Function.html" },
+                { title: "Handling Date Comparisons in SQL with GETDATE() and Formatting", external: "SQL/ex2.html" },
+                { title: "Gold Rate Tracking Using SQL Date Functions", external: "SQL/ex3.html" },
+                { title: "DATEDIFF()", external: "SQL/DATEDIFF_Function.html" },
+                { title: "EOMONTH()", external: "SQL/EOMONTH_Function.html" },
+                { title: "Assignment", external: "SQL/ex4.html" },
+                { title: "Numeric functions", external: "SQL/Numeric_functions.html" },
+                { title: "ROUND()", external: "SQL/ROUND_Function.html" },
+                { title: "CEILING()", external: "SQL/CEILING_Function.html" },
+                { title: "FLOOR()", external: "SQL/FLOOR_Function.html" },
+                { title: "Conversion Functions ", external: "SQL/Conversion Functions.html" },
+                { title: "CAST()", external: "SQL/CAST_Function.html" },
+                { title: "CONVERT()", external: "SQL/CONVERT_Function.html" },
+                { title: "Formatting Date and Money Values in SQL Server Using CONVERT()", external: "SQL/ex5.html" },
+                { title: "ISNULL()", external: "SQL/ISNULL_functions.html" },
+                { title: "Analytical Functions or Window Functions", external: "SQL/Analytical_or_Window_Functions.html" },
+                { title: "RANK & DENSE RANK", external: "SQL/RANK_&_DENSE_RANK.html" },
+                { title: "PARTITION BY clause", external: "SQL/PARTITION_BY_clause.html" },
+                { title: "ROW_NUMBER()", external: "SQL/ROW_NUMBEr_function.html" },
+                { title: "LAG & LEAD", external: "SQL/LAG_&_LEAD.html" },
+                { title: "Calculating Growth, Percentage Change, and Date Differences Using LAG()", external: "SQL/ex6.html" },
+                { title: "Aggregate functions", external: "SQL/Aggregate_functions.html" },
+                { title: "MAX()", external: "SQL/MAX_function.html" },
+                { title: "MIN()", external: "SQL/MIN_function.html" },
+                { title: "SUM()", external: "SQL/SUM_function.html" },
+                { title: "AVG()", external: "SQL/AVG_function.html" },
+                { title: "COUNT()", external: "SQL/COUNT_function.html" },
+                { title: "COUNT(*)", external: "SQL/COUNTstar_function.html" },
+                { title: "SQL Built-in Functions A Complete Summary by Category", external: "SQL/ex7.html" },
+                { title: "GROUP BY clause", external: "SQL/GROUP_BY_clause.html" },
+                { title: "WHERE VS HAVING", external: "SQL/WHERE_VS_HAVING.html" },
+                { title: "ROLLUP()", external: "SQL/ROLLUP_function.html" },
+                { title: "CUBE()", external: "SQL/CUBE_Function.html" },
+                { title: "Grouping and Aggregation in SQL", external: "SQL/ex8.html" },
+                { title: "CASE Statement", external: "SQL/CASE_statement.html" },
+                { title: "Simple CASE", external: "SQL/Simple_CASE.html" },
+                { title: "Searched CASE", external: "SQL/Searched_Case.html" },
+                { title: "JOINS", external: "SQL/JOINS.html" },
+                { title: "Types of JOINS", external: "SQL/Types_of_JOINS.html" },
+                { title: "Equi Join", external: "SQL/Equi_Join.html" },
+                { title: "Join Conditions", external: "SQL/Join_Conditions.html" },
+                { title: "Joining More Than Two Tables", external: "SQL/Joining More Than Two Tables.html" },
+                { title: "OUTER JOIN", external: "SQL/OUTER_JOIN.html" },
+                { title: "LEFT JOIN", external: "SQL/LEFT_JOIN.html" },
+                { title: "##", external: "#" },
+                { title: "##", external: "#" },
+                { title: "##", external: "#" },
+                { title: "##", external: "#" },
+                { title: "SQL LAB 1", external: "SQL/LAB/practical_lab1.html" },
+                { title: "SQL LAB 2", external: "SQL/LAB/practical_lab2.html" },
+                { title: "SQL LAB 3", external: "SQL/LAB/practical_lab3.html" },
+                                                    
+                                                            
+            ],
+            Python: [
+                { title: "Introduction to Python", content: "Python is a versatile, high-level programming language known for its readability and simplicity." },
+                { title: "Variables & Data Types", content: "Variables store data. Python supports types like int, float, str, list, dict, etc." },
+                { title: "Control Flow", content: "Control flow tools include if, for, while, and functions." },
+                { title: "Functions", content: "Functions help organize code into reusable blocks. Define with def keyword." },
+                { title: "Modules & Packages", content: "Modules are files containing Python code. Packages are collections of modules." }
+            ],
+            JavaScript: [
+                { title: "Introduction to JavaScript", content: "JavaScript is the language of the web, enabling interactive web pages." },
+                { title: "Variables & Data Types", content: "JavaScript supports var, let, const for variables and types like string, number, boolean, object, etc." },
+                { title: "DOM Manipulation", content: "The DOM allows JavaScript to interact with HTML elements." },
+                { title: "Events", content: "Events are actions that can be handled with JavaScript, like clicks and keypresses." },
+                { title: "ES6 Features", content: "ES6 introduced features like arrow functions, classes, template literals, and more." }
+            ],
+            HTML: [
+                { title: "Introduction to HTML", content: "HTML is the standard markup language for creating web pages." },
+                { title: "Elements & Tags", content: "HTML uses tags to define elements. Example: <p>, <a>, <div>." },
+                { title: "Attributes", content: "Attributes provide additional information about elements. Example: href, src, alt." },
+                { title: "Forms", content: "Forms collect user input. Elements include <form>, <input>, <textarea>, etc." },
+                { title: "Semantic HTML", content: "Semantic tags like <header>, <footer>, <article> improve accessibility and SEO." }
+            ],
+            CSharp: [
+                { title: "syntax for all major OOP concepts in C#", external: "C#/csharp oop syntax.html" },
+                { title: "##", external: "#" },
+                { title: "##", external: "#" },
+                { title: "##", external: "#" },
+                { title: "##", external: "#" },
+                { title: "Responsive Design", content: "Responsive design ensures websites look good on all devices." }
+            ]
+        };
+
+        // DOM elements
+        const subjectsBar = document.getElementById('subjectsBar');
+        const topicsList = document.getElementById('topicsList');
+        const sidebarTitle = document.getElementById('sidebarTitle');
+        const mainContent = document.getElementById('mainContent');
+
+        // Render topics for a subject
+        function renderTopics(subject) {
+            sidebarTitle.textContent = subject + " Topics";
+            topicsList.innerHTML = '';
+            subjects[subject].forEach((topic, idx) => {
+                const li = document.createElement('li');
+                li.innerHTML = `<a href="#" data-idx="${idx}" class="${idx === 0 ? 'active' : ''}">${topic.title}</a>`;
+                topicsList.appendChild(li);
+            });
+        }
+
+        // Show topic content
+        function showTopic(subject, idx) {
+            const topic = subjects[subject][idx];
+            if (topic.external) {
+                mainContent.innerHTML = `<h2>${topic.title}</h2>
+                    <iframe src="${topic.external}" style="width:100%;height:70vh;border:1px solid #ccc;border-radius:8px;background:#fff;"></iframe>`;
+            } else {
+                mainContent.innerHTML = `<h2>${topic.title}</h2><p>${topic.content}</p>`;
+            }
+            // Highlight active topic
+            Array.from(topicsList.querySelectorAll('a')).forEach((a, i) => {
+                a.classList.toggle('active', i === idx);
+            });
+        }
+
+        // Handle subject change
+        subjectsBar.addEventListener('click', e => {
+            if (e.target.classList.contains('subject-btn')) {
+                // Set active subject button
+                Array.from(subjectsBar.children).forEach(btn => btn.classList.remove('active'));
+                e.target.classList.add('active');
+                const subject = e.target.dataset.subject;
+                renderTopics(subject);
+                showTopic(subject, 0);
+            }
+        });
+
+        // Handle topic click
+        topicsList.addEventListener('click', e => {
+            if (e.target.tagName === 'A') {
+                e.preventDefault();
+                const idx = parseInt(e.target.dataset.idx, 10);
+                const subject = document.querySelector('.subject-btn.active').dataset.subject;
+                showTopic(subject, idx);
+            }
+        });
+
+        // Initial render
+        renderTopics('SQL');
+        showTopic('SQL', 0);
+    </script>
+</body>
+</html>
